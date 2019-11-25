@@ -1,50 +1,20 @@
 import React from 'react'
-import io from 'socket.io-client'
-const socket = io()
+import Chat from './Chat'
+import Form from './Form'
 
 class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      message : '',
-      messages:[]
+      page:0
     }
   }
-
-  handelSubmit = (e) => {
-    e.preventDefault()
-    socket.emit('chat message', this.state.message)
-    this.setState({
-      message : ''
-    })
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      message : e.target.value
-    })
-  }
-
-  componentDidMount(){
-    socket.on('chat message', (msg)=>{
-      this.setState({
-        messages : [...this.state.messages, msg]
-      })
-    })
-  }
-
   render(){
-    return (
-      <div>
-      <ul id="messages">
-        {this.state.messages.map((message, i)=>{
-        return <li key={i}>{message}</li>
-        })}
-      </ul>
-      <form onSubmit={this.handelSubmit}>
-        <input id="m" autoComplete="off" onChange={this.handleChange} value={this.state.message}/><button>Send</button>
-      </form>
-    </div>
+    return(
+      <>
+      {this.state.page == 0 && <Form></Form>}
+      {this.state.page == 1 && <Chat></Chat>}
+      </>
     )
   }
 }
