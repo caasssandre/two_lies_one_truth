@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import io from 'socket.io-client'
 const socket = io()
 
@@ -7,7 +8,7 @@ class Chat extends React.Component{
     super(props)
     this.state = {
       message : {
-        sender: 'cass',
+        sender: '',
         message:''},
       messages:[]
     }
@@ -18,7 +19,7 @@ class Chat extends React.Component{
     socket.emit('chat message', this.state.message)
     this.setState({
       message : {
-        sender: 'cass',
+        sender: this.props.name,
         message:''}
     })
   }
@@ -26,13 +27,14 @@ class Chat extends React.Component{
   handleChange = (e) => {
     this.setState({
       message : {
-        sender: 'cass',
+        sender: this.props.name,
         message: e.target.value}
     })
   }
 
   componentDidMount(){
     socket.on('chat message', (msg)=>{
+      console.log('hello')
       this.setState({
         messages : [...this.state.messages, msg]
       })
@@ -42,6 +44,7 @@ class Chat extends React.Component{
   render(){
     return (
       <div>
+      <h4>Messages</h4>
       <ul id="messages">
         {this.state.messages.map((message, i)=>{
         return <li key={i}>{message.sender + ': '+message.message}</li>
@@ -55,5 +58,10 @@ class Chat extends React.Component{
   }
 }
  
+function mapStateToProps(state) {
+  return {
+    name : state.name
+  }
+}
 
-export default Chat
+export default connect(mapStateToProps)(Chat)

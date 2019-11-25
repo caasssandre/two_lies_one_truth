@@ -1,4 +1,7 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import io from 'socket.io-client'
+const socket = io()
 
 class Form extends React.Component {
   constructor(props){
@@ -16,7 +19,14 @@ class Form extends React.Component {
 
   handleSubmit = (e) =>{
     e.preventDefault()
-    console.log(this.state.name)
+    this.props.dispatch({
+      type:'INCREMENT_PAGE',
+    })
+    this.props.dispatch({
+      type: 'SAVE_NAME',
+      name: this.state.name
+    })
+    socket.emit('join room', 'room1')
   }
 
   render(){
@@ -28,4 +38,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form
+export default connect()(Form)

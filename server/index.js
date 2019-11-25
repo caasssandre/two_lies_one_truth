@@ -5,12 +5,18 @@ const io = require('socket.io')(http)
 const port = process.env.PORT || 3000
 
 io.on('connection', function(socket){
+  socket.join('room1')
   console.log('a user connected');
   socket.on('disconnect', function(){
     console.log('user disconnected');
   })
+  // socket.on('join room', (roomName)=>{
+  //   console.log(roomName)
+  //   socket.join(roomName)
+  // })
   socket.on('chat message', function(msg){
-    io.emit('chat message', msg)
+    console.log(msg)
+    io.to('room1').emit('chat message', msg)
   })
 })
 
