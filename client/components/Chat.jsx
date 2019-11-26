@@ -14,7 +14,7 @@ class Chat extends React.Component{
     }
   }
 
-  handelSubmit = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault()
     socket.emit('chat message', this.state.message)
     this.setState({
@@ -34,7 +34,6 @@ class Chat extends React.Component{
 
   componentDidMount(){
     socket.on('chat message', (msg)=>{
-      console.log('hello')
       this.setState({
         messages : [...this.state.messages, msg]
       })
@@ -50,7 +49,7 @@ class Chat extends React.Component{
         return <li key={i}>{message.sender + ': '+message.message}</li>
         })}
       </ul>
-      <form onSubmit={this.handelSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <input id="m" autoComplete="off" onChange={this.handleChange} value={this.state.message.message}/><button>Send</button>
       </form>
     </div>

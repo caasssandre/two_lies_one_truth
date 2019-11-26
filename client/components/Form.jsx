@@ -7,13 +7,14 @@ class Form extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      name: ''
+      name: '',
+      roomId: ''
     }
   }
 
   handleChange = (e) =>{
     this.setState({
-      name: e.target.value
+      [e.target.name] : e.target.value
     })
   }
 
@@ -26,13 +27,15 @@ class Form extends React.Component {
       type: 'SAVE_NAME',
       name: this.state.name
     })
-    socket.emit('join room', 'room1')
+    // socket.emit('join room', 'room1')
+    socket.emit('add player', this.state.name)
   }
 
   render(){
     return(
     <form onSubmit={this.handleSubmit}>
-      <input onChange={this.handleChange}placeholder='enter your name'></input><button>Send</button>
+      <input onChange={this.handleChange} name='roomId' placeholder='enter your room code'></input>
+      <input onChange={this.handleChange} name='name' placeholder='enter your name'></input><button>Send</button>
     </form>
     )
   }

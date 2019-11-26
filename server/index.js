@@ -1,6 +1,7 @@
 const server = require('./server')
 const http = require('http').createServer(server)
 const io = require('socket.io')(http)
+const {addPlayer} = require('./db/players')
 
 const port = process.env.PORT || 3000
 
@@ -11,12 +12,16 @@ io.on('connection', function(socket){
     console.log('user disconnected');
   })
   // socket.on('join room', (roomName)=>{
-  //   console.log(roomName)
   //   socket.join(roomName)
+  //   console.log('join room')
   // })
   socket.on('chat message', function(msg){
+    console.log(socket.rooms)
     console.log(msg)
     io.to('room1').emit('chat message', msg)
+  })
+  socket.on('add player', (name)=>{
+    addPlayer(name)
   })
 })
 
