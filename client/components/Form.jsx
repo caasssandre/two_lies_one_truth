@@ -27,7 +27,7 @@ class Form extends React.Component {
       type: 'SAVE_NAME',
       name: this.state.name
     })
-    // socket.emit('join room', 'room1')
+    socket.emit('join room', 'room1')
     socket.emit('add player', this.state.name)
   }
 

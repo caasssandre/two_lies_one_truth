@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import io from 'socket.io-client'
+
 const socket = io()
 
 class Chat extends React.Component{
@@ -38,6 +39,10 @@ class Chat extends React.Component{
         messages : [...this.state.messages, msg]
       })
     })
+  }
+
+  componentWillUnmount(){
+    removePlayer({name : this.props.name, roomCode : 'room1'})
   }
 
   render(){
