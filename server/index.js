@@ -1,7 +1,6 @@
 const server = require('./server')
 const http = require('http').createServer(server)
 const io = require('socket.io')(http)
-// const {addPlayer} = require('./db/players')
 const db = require('./db/players')
 
 const port = process.env.PORT || 3000
@@ -23,6 +22,9 @@ io.on('connection', function(socket){
   })
   socket.on('add player', (name)=>{
     db.addPlayer(name)
+  })
+  socket.on('remove player', (name)=>{
+    db.removePlayer(name)
   })
   socket.on('start game', ()=>{
     db.getPlayers().then(players=>

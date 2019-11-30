@@ -15,7 +15,8 @@ class Confirm extends React.Component {
 
   componentDidMount(){
     socket.on('start game', (players)=>{
-      this.props.dispatch({type: 'ADD_PLAYERS', players}), this.props.dispatch({
+      this.props.dispatch({type: 'ADD_PLAYERS', players}),
+      this.props.dispatch({
         type:'INCREMENT_PAGE',
       })
     })

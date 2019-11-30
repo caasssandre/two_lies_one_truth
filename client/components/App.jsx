@@ -1,5 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import io from 'socket.io-client'
+const socket = io()
 
 import Chat from './Chat'
 import Form from './Form'
@@ -10,6 +12,11 @@ class App extends React.Component {
   constructor(props){
     super(props)
   }
+
+  componentWillUnmount(){
+    socket.emit('remove player', this.props.name)
+  }
+
   render(){
     return(
       <>
@@ -24,7 +31,8 @@ class App extends React.Component {
 
 function mapStateToProps(state){
   return {
-    appStatus : state.appStatus
+    appStatus : state.appStatus,
+    name : state.name
   }
 }
 
