@@ -7,6 +7,7 @@ import Chat from './Chat'
 import Form from './Form'
 import Confirm from './Confirm'
 import Game from './Game'
+import Guess from './Guess'
 
 class App extends React.Component {
   constructor(props){
@@ -23,7 +24,8 @@ class App extends React.Component {
       {this.props.appStatus == 0 && <Form></Form>}
       {this.props.appStatus == 1 && <Confirm></Confirm>}
       {this.props.appStatus == 2 && <Game></Game>}
-      {this.props.appStatus == 3 && <Chat></Chat>}
+      {this.props.appStatus == 3 && <Guess></Guess>}
+      {this.props.appStatus == 4 && <Chat></Chat>}
       </>
     )
   }

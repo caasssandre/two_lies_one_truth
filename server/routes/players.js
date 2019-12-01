@@ -9,4 +9,12 @@ router.get('/', (req, res) =>{
     .then(players => res.send(players))
 })
 
+router.post('/', (req, res)=>{
+  db.addPlayer(req.body.name)
+  .then(()=>{
+    db.getPlayers()
+      .then(players => res.send(players))
+  })
+})
+
 module.exports = router

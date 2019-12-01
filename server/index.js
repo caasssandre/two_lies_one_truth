@@ -12,16 +12,13 @@ io.on('connection', function(socket){
     console.log('user disconnected');
   })
   socket.on('join room', (roomName)=>{
-    socket.join(roomName, (err)=>{console.log(err)})
-    console.log('join room')
+    socket.join(roomName, (err)=>{})
+    // console.log('join room')
   })
   socket.on('chat message', function(msg){
-    console.log(socket.rooms)
-    console.log(msg)
+    // console.log(socket.rooms)
+    // console.log(msg)
     io.to('room1').emit('chat message', msg)
-  })
-  socket.on('add player', (name)=>{
-    db.addPlayer(name)
   })
   socket.on('remove player', (name)=>{
     db.removePlayer(name)
@@ -30,6 +27,9 @@ io.on('connection', function(socket){
     db.getPlayers().then(players=>
       io.to('room1').emit('start game', players)
       )
+  })
+  socket.on('add response', response =>{
+    io.to('room1').emit('add response', response)
   })
 })
 
@@ -40,6 +40,6 @@ http.listen(port, function () {
 })
 
 server.get('/', (req, res)=>{
-  console.log('in the get route')
+  // console.log('in the get route')
   res.sendfile('/index.html')
 })

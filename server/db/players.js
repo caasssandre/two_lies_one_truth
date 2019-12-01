@@ -6,7 +6,7 @@ const connection = require('knex')(config)
 
 function addPlayer(name, db = connection){
   return db('players').insert({'name': name, 'room_code': 'room1'})
-  .then(thing => console.log(thing))
+  .then(thing => console.log('add player ' + thing))
 }
 
 function getPlayers(db = connection){

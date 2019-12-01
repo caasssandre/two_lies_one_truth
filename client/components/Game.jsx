@@ -1,5 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import io from 'socket.io-client'
+
+const socket = io()
 
 
 class Game extends React.Component{
@@ -12,6 +15,16 @@ class Game extends React.Component{
     }
   }
 
+  componentDidMount(){
+    socket.on('start game', players=>{console.log(players)})
+    socket.on('add response', response=>{
+      this.props.dispatch({
+        type:'ADD_RESPONSE',
+        response: response
+      })
+    })
+  }
+
   handleChange=(e)=>{
     this.setState({
       [e.target.name] : e.target.value
@@ -20,17 +33,16 @@ class Game extends React.Component{
 
   handleSubmit=(e)=>{
     e.preventDefault()
+    socket.emit('add response', {
+      statements: this.state,
+      name:this.props.name
+    })
     this.props.dispatch({
-      type:'ADD_RESPONSE',
-      response:{
-        statements: this.state,
-        name:this.props.name
-      }
+      type:'INCREMENT_PAGE',
     })
   }
 
   render(){
-    console.log(this.props.name)
     return(
       <>
   <h1>Hi, {this.props.name} write two truths and one lie about yourself</h1>
