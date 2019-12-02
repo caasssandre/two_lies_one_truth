@@ -33,7 +33,9 @@ class Form extends React.Component {
     })
     socket.emit('join room', this.state.roomId)
     addPlayer(this.state.name, this.state.roomId)
-    // .then(res=>console.log(res))
+    .then(res=>{
+      socket.emit('show players', {room: this.state.roomId, names:res})
+    })
   }
 
   render(){

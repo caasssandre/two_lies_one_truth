@@ -14,12 +14,12 @@ function getPlayers(room, db = connection){
   return db('players').where('room_code', room)
 }
 
-// function removePlayer(name, db = connection){
-//   return db('players').where('name', name).where('room_code', 'room1').delete()
-// }
+function removePlayer(name, db = connection){
+  return db('players').where('name', name).where('room_code', 'room1').delete()
+}
 
 module.exports = {
   addPlayer,
   getPlayers,
-  // removePlayer
+  removePlayer
 }

@@ -19,6 +19,9 @@ io.on('connection', function(socket){
   // socket.on('remove player', (name)=>{
   //   db.removePlayer(name)
   // })
+  socket.on('show players', (players)=>{
+    io.to(players.room).emit('show players', players.names)
+  })
   socket.on('start game', (room)=>{
     db.getPlayers(room).then(players=>
       io.to(room).emit('start game', players)

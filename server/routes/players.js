@@ -10,7 +10,6 @@ router.get('/', (req, res) =>{
 })
 
 router.post('/', (req, res)=>{
-  // console.log(req.body)
   db.addPlayer(req.body.name, req.body.room)
   .then(()=>{
     db.getPlayers(req.body.room)
