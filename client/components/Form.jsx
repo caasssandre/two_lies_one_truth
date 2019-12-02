@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import io from 'socket.io-client'
-const socket = io()
 import {addPlayer} from '../api/players'
+import socket from '../api/socket'
 
 class Form extends React.Component {
   constructor(props){
@@ -28,8 +27,12 @@ class Form extends React.Component {
       type: 'SAVE_NAME',
       name: this.state.name
     })
-    socket.emit('join room', 'room1')
-    addPlayer(this.state.name)
+    this.props.dispatch({
+      type: 'JOIN_ROOM',
+      room: this.state.roomId
+    })
+    socket.emit('join room', this.state.roomId)
+    addPlayer(this.state.name, this.state.roomId)
     // .then(res=>console.log(res))
   }
 

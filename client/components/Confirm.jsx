@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import io from 'socket.io-client'
 
-const socket = io()
+import socket from '../api/socket'
 
 class Confirm extends React.Component {
   constructor(props){
@@ -10,7 +9,7 @@ class Confirm extends React.Component {
   }
 
   handleClick = () => {
-    socket.emit('start game')
+    socket.emit('start game', this.props.room)
   }
 
   componentDidMount(){
@@ -31,7 +30,8 @@ class Confirm extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    name : state.name
+    name : state.name,
+    room : state.roomName
   }
 }
 

@@ -1,8 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import io from 'socket.io-client'
-
-const socket = io()
+import socket from '../api/socket'
 
 
 class Game extends React.Component{
@@ -34,6 +32,7 @@ class Game extends React.Component{
   handleSubmit=(e)=>{
     e.preventDefault()
     socket.emit('add response', {
+      room: this.props.room,
       statements: this.state,
       name:this.props.name
     })
@@ -59,7 +58,7 @@ class Game extends React.Component{
 
 function mapStateToProps(state){
   return {
-    //players : state.players,
+    room: state.roomName,
     name : state.name
   }
 }

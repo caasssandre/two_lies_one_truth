@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import io from 'socket.io-client'
-const socket = io()
+import socket from '../api/socket'
+
 
 import Chat from './Chat'
 import Form from './Form'
