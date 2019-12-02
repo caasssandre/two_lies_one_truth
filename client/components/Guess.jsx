@@ -26,7 +26,6 @@ class Guess extends React.Component {
 
   handleClick = (e) => {
     if (e.target.id == 'submit' && this.state.showStatement < this.props.players.length-2) {
-      currentGuess.name = e.target.value
       this.setState({
         showStatement: this.state.showStatement + 1,
         guesses: [...this.state.guesses, currentGuess]
@@ -48,12 +47,11 @@ class Guess extends React.Component {
     }
     else {
       currentGuess[e.target.id] = !currentGuess[e.target.id]
+      currentGuess.name = e.target.value
     }
   }
 
   render() {
-    console.log(this.state.showStatement)
-    console.log(this.props.players.length-2)
     let responses = this.props.truthsAndLie.filter(response => {
       return response.name != this.props.name
     })
@@ -64,13 +62,12 @@ class Guess extends React.Component {
     return (
       <>
         {this.state.showStatement == -1 && <h1>Please wait while everyone responds</h1>}
-        {/* {this.state.showStatement == -2 && } */}
         {this.state.showStatement >= 0 &&
           <>
             <h1>{responses[this.state.showStatement].name}</h1>
             <p id={first}>{responses[this.state.showStatement].statements[first]}</p>
             <label className='toggle-label'>
-              <input type='checkbox' id={first} onClick={this.handleClick}></input>
+              <input type='checkbox' id={first} onClick={this.handleClick} value={responses[this.state.showStatement].name}></input>
               <span className='back'>
                 <span className='toggle'></span>
                 <span className='label on'>Truth</span>
@@ -79,7 +76,7 @@ class Guess extends React.Component {
             </label>
             <p id={second}>{responses[this.state.showStatement].statements[second]}</p>
             <label className='toggle-label'>
-              <input type='checkbox' id={second} onClick={this.handleClick}></input>
+              <input type='checkbox' id={second} onClick={this.handleClick} value={responses[this.state.showStatement].name}></input>
               <span className='back'>
                 <span className='toggle'></span>
                 <span className='label on'>Truth</span>
@@ -88,14 +85,14 @@ class Guess extends React.Component {
             </label>
             <p id={third}>{responses[this.state.showStatement].statements[third]}</p>
             <label className='toggle-label'>
-              <input type='checkbox' id={third} onClick={this.handleClick}></input>
+              <input type='checkbox' id={third} onClick={this.handleClick} value={responses[this.state.showStatement].name}></input>
               <span className='back'>
                 <span className='toggle'></span>
                 <span className='label on'>Truth</span>
                 <span className='label off'>Lie</span>
               </span>
             </label>
-            <button id={"submit"} value={responses[this.state.showStatement].name} onClick={this.handleClick}>Submit</button>
+            <button id={"submit"} onClick={this.handleClick}>Submit</button>
           </>
           }
 
