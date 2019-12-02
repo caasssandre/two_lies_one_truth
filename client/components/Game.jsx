@@ -16,7 +16,7 @@ class Game extends React.Component{
   }
 
   componentDidMount(){
-    socket.on('start game', players=>{console.log(players)})
+    socket.on('start game', players=>{players})
     socket.on('add response', response=>{
       this.props.dispatch({
         type:'ADD_RESPONSE',
