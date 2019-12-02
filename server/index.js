@@ -13,12 +13,6 @@ io.on('connection', function(socket){
   socket.on('join room', (roomName)=>{
     socket.join(roomName)
   })
-  // socket.on('chat message', function(msg){
-  //   io.to('room1').emit('chat message', msg)
-  // })
-  // socket.on('remove player', (name)=>{
-  //   db.removePlayer(name)
-  // })
   socket.on('show players', (players)=>{
     io.to(players.room).emit('show players', players.names)
   })
@@ -39,6 +33,5 @@ http.listen(port, function () {
 })
 
 server.get('/', (req, res)=>{
-  // console.log('in the get route')
   res.sendfile('/index.html')
 })

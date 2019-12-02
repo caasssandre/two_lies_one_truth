@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import socket from '../api/socket'
 
 
-import Chat from './Chat'
 import Form from './Form'
 import Confirm from './Confirm'
 import Game from './Game'
@@ -27,7 +26,6 @@ class App extends React.Component {
       {this.props.appStatus == 2 && <Game></Game>}
       {this.props.appStatus == 3 && <Guess></Guess>}
       {this.props.appStatus == 4 && <Results></Results>}
-      {this.props.appStatus == 5 && <Chat></Chat>}
       </>
     )
   }
