@@ -15,10 +15,6 @@ class Join extends React.Component {
     }
   }
 
-  // componentDidMount() {
-
-  // }
-
   handleClick = (e) => {
     e.preventDefault()
     e.persist()
@@ -96,6 +92,7 @@ class Join extends React.Component {
           <button id='create' onClick={this.handleClick}>Create a new room</button>
           <button id='join' onClick={this.handleClick}>Join existing room</button>
         </form>
+        {this.state.message != '' && <h2>{this.state.message}</h2>}
       </>
     )
   }
