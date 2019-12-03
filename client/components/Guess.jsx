@@ -47,7 +47,6 @@ class Guess extends React.Component {
     }
     else {
       currentGuess[e.target.id] = !currentGuess[e.target.id]
-      currentGuess.name = e.target.value
     }
   }
 
@@ -59,7 +58,10 @@ class Guess extends React.Component {
     let first = statements.splice(Math.floor(Math.random() * 3), 1)
     let second = statements.splice(Math.floor(Math.random() * 2), 1)
     let third = statements[0]
-    return (
+    if(this.state.showStatement >= 0){
+      currentGuess.name = responses[this.state.showStatement].name
+    }
+      return (
       <>
         {this.state.showStatement == -1 && <h1>Please wait while everyone responds</h1>}
         {this.state.showStatement >= 0 &&
