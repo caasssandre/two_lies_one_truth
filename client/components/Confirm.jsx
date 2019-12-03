@@ -34,6 +34,7 @@ class Confirm extends React.Component {
   render(){
     return (
       <>
+      <h2>You are in room {this.props.room}</h2>
       <button onClick={this.handleClick}>Everyone is in!!</button>
       {this.state.players.map(player=>{
         if(player.name != this.props.name){

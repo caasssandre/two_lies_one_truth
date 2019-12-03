@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import socket from '../api/socket'
 
 
+import Join from './Join'
 import Form from './Form'
 import Confirm from './Confirm'
 import Game from './Game'
@@ -14,14 +15,15 @@ class App extends React.Component {
     super(props)
   }
 
-  componentWillUnmount(){
-    socket.emit('remove player', this.props.name)
-  }
+  // componentWillUnmount(){
+  //   socket.emit('remove player', this.props.name)
+  // }
 
   render(){
     return(
       <>
-      {this.props.appStatus == 0 && <Form></Form>}
+      {this.props.appStatus == 0 && <Join></Join>}
+      {/* {this.props.appStatus == 0 && <Form></Form>} */}
       {this.props.appStatus == 1 && <Confirm></Confirm>}
       {this.props.appStatus == 2 && <Game></Game>}
       {this.props.appStatus == 3 && <Guess></Guess>}

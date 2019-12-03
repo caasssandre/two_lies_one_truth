@@ -20,6 +20,7 @@ class Game extends React.Component{
         type:'ADD_RESPONSE',
         response: response
       })
+      
     })
   }
 

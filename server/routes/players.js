@@ -17,4 +17,9 @@ router.post('/', (req, res)=>{
   })
 })
 
+router.get('/rooms', (req, res) =>{
+  db.getRooms()
+    .then(rooms => res.json(rooms))
+})
+
 module.exports = router
