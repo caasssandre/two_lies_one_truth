@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {addPlayer, getRooms} from '../api/players'
+import {addPlayer, getRooms, getPlayers} from '../api/players'
 import socket from '../api/socket'
+import { get } from 'http'
 
 class Join extends React.Component {
   constructor(props) {
@@ -14,9 +15,9 @@ class Join extends React.Component {
     }
   }
 
-  componentDidMount() {
+  // componentDidMount() {
 
-  }
+  // }
 
   handleClick = (e) => {
     e.preventDefault()
@@ -42,7 +43,19 @@ class Join extends React.Component {
           })
         }
         else {
-          this.joinRoom()
+          getPlayers(this.state.currentRoom).then(res=>{
+            console.log(JSON.parse(res.text))
+            if (!JSON.parse(res.text).find(player=>{
+              return player.name == this.state.name
+            })){
+              this.joinRoom()
+            }
+            else {
+              this.setState({
+                message: 'This username is taken'
+              })
+            }
+          })
         }
       }
     })
@@ -63,9 +76,6 @@ class Join extends React.Component {
     })
     addPlayer(this.state.name, this.state.currentRoom)
     .then(res=>{
-      this.setState({
-        players: res
-      })
       socket.emit('show players', {room: this.state.currentRoom, names:res})
     })
   }

@@ -5,7 +5,8 @@ const db = require('../db/players')
 const router = express.Router()
 
 router.get('/', (req, res) =>{
-  db.getPlayers(req.body.room)
+  console.log(req.query)
+  db.getPlayers(req.query.room)
     .then(players => res.send(players))
 })
 

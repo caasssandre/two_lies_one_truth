@@ -1,10 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import socket from '../api/socket'
 
 
 import Join from './Join'
-import Form from './Form'
+// import Form from './Form'
 import Confirm from './Confirm'
 import Game from './Game'
 import Guess from './Guess'
@@ -15,9 +14,6 @@ class App extends React.Component {
     super(props)
   }
 
-  // componentWillUnmount(){
-  //   socket.emit('remove player', this.props.name)
-  // }
 
   render(){
     return(
